@@ -1,0 +1,13 @@
+
+.option {
+  padding: 4px 16px 4px 16px;
+  text-align: left;
+  color: rgb(17 24 39);
+
+  &--hover{
+    background-color: rgb(165 243 252)!important;
+  }
+  &--selected{
+    background-color: rgb(103 232 249);
+  }
+}
