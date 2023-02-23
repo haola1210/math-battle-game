@@ -1,6 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './App.css';
-import { Mafs, Coordinates, Point, Circle, Polygon } from 'mafs';
+import { Mafs, Coordinates } from 'mafs';
+import BoundContextProvider from '@modules/2Ds/contexts/BoundContext';
+import Soldier from '@modules/2Ds/components/Soldier';
+import MapRange from '@modules/2Ds/components/MapRange';
+import { useEventBus } from '@modules/2Ds/contexts/EventBusContext';
+import * as math from 'mathjs';
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -13,58 +18,79 @@ function App() {
     }
   }, []);
 
+  // #region
+  const bus$ = useEventBus();
+
+  const shoot = () => {
+    try {
+      const f = math.compile(equation);
+      bus$.next({
+        action: 'SHOOT',
+        payload: f,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const [equation, setEquation] = useState('');
+
+  // #endregion
+
   return (
     <div
       className='App'
       ref={container}
     >
-      <Mafs
-        pan={true}
-        zoom={{
-          min: 0.2,
-          max: 1,
-        }}
-        viewBox={{
-          x: [-9, 9],
-          y: [-6, 6],
-        }}
-        preserveAspectRatio='contain'
-        width={size[0]}
-        height={size[1]}
+      <br />
+      <input
+        type='text'
+        value={equation}
+        onChange={(e) => setEquation(e.target.value)}
+      />
+      <button
+        onClick={shoot}
+        disabled={equation === ''}
       >
-        <Coordinates.Cartesian
-          xAxis={{
-            labels: false,
-            lines: false,
+        shoot
+      </button>
+      <br />
+      <BoundContextProvider
+        bound={[
+          [-50, 50],
+          [-35, 35],
+        ]}
+      >
+        <Mafs
+          pan={true}
+          zoom={{
+            min: 0.15,
+            max: 1,
           }}
-          yAxis={{
-            labels: false,
-            lines: false,
+          viewBox={{
+            x: [-10, 10],
+            y: [-7, 7],
           }}
-        />
-        {/* <Point
-          x={3}
-          y={3}
-          svgCircleProps={{
-            r: 2,
-          }}
-        /> */}
+          preserveAspectRatio='contain'
+          width={size[0]}
+          height={size[1]}
+        >
+          <Coordinates.Cartesian
+            xAxis={{
+              labels: (x) => (Math.abs(x) <= 50 && x % 10 === 0 ? x : ''),
+              lines: false,
+            }}
+            yAxis={{
+              labels: (y) => (Math.abs(y) <= 35 && y % 10 === 0 ? y : ''),
+              lines: false,
+            }}
+          />
 
-        <Polygon
-          points={[
-            [-50, -35],
-            [50, -35],
-            [50, 35],
-            [-50, 35],
-          ]}
-        />
+          <MapRange />
 
-        <Circle
-          center={[3, 3]}
-          radius={0.7}
-          fillOpacity={1}
-        />
-      </Mafs>
+          <Soldier initialCenter={[10, 3]} />
+        </Mafs>
+      </BoundContextProvider>
     </div>
   );
 }
