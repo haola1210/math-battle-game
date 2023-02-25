@@ -5,8 +5,6 @@ export default function useClearOldBullet(didBulletStop: undefined | boolean) {
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
-    console.log(didBulletStop);
-
     let id: NodeJS.Timer;
 
     if (didBulletStop) {
@@ -22,7 +20,7 @@ export default function useClearOldBullet(didBulletStop: undefined | boolean) {
       }, 100);
     }
 
-    if (didBulletStop === undefined) {
+    if (!didBulletStop) {
       setOpacity(1);
     }
 

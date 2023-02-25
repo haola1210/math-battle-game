@@ -5,7 +5,6 @@ import BoundContextProvider from '@modules/2Ds/contexts/BoundContext';
 import Soldier from '@modules/2Ds/components/Soldier';
 import MapRange from '@modules/2Ds/components/MapRange';
 import { useEventBus } from '@modules/2Ds/contexts/EventBusContext';
-import * as math from 'mathjs';
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -22,15 +21,10 @@ function App() {
   const bus$ = useEventBus();
 
   const shoot = () => {
-    try {
-      const f = math.compile(equation);
-      bus$.next({
-        action: 'SHOOT',
-        payload: f,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
+    bus$.next({
+      action: 'SHOOT',
+      payload: equation,
+    });
   };
 
   const [equation, setEquation] = useState('');

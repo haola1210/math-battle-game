@@ -21,6 +21,7 @@
       "@assets/*": ["./assets/*"],
       "@interfaces/*": ["./interfaces/*"],
       "@modules/*": ["./modules/*"],
+      "@contexts/*": ["./contexts/*"],
 
     }
   },

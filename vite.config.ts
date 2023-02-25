@@ -11,6 +11,7 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@interfaces": path.resolve(__dirname, "./src/interfaces"),
       "@modules": path.resolve(__dirname, "./src/modules"),
+      "@contexts": path.resolve(__dirname, "./src/contexts"),
     }
   },
   server: {

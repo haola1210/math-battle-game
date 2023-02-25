@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-types */
-import { Circle, Plot, type vec } from 'mafs';
+import { Circle, type vec } from 'mafs';
 import { useState, useEffect } from 'react';
-import useShooting from './hooks/useShooting';
-import useClearOldBullet from './hooks/useClearOldBullet';
+import useShooting from './hooks/useShooting2';
 import { useEventBus } from '@modules/2Ds/contexts/EventBusContext';
 
 interface ISoldier {
@@ -11,7 +9,7 @@ interface ISoldier {
 
 export default function Soldier({ initialCenter }: ISoldier) {
   const [center, setCenter] = useState(initialCenter);
-  const { x, bulletTrajectory, shoot, didBulletStop } = useShooting(center);
+  const { shoot, element } = useShooting();
 
   const bus$ = useEventBus();
 
@@ -19,7 +17,7 @@ export default function Soldier({ initialCenter }: ISoldier) {
     const sub = bus$.subscribe({
       next(e) {
         if (e.action === 'SHOOT') {
-          shoot(e.payload as math.EvalFunction);
+          shoot(e.payload as string, center);
         }
       },
     });
@@ -29,19 +27,6 @@ export default function Soldier({ initialCenter }: ISoldier) {
     };
   }, [shoot]);
 
-  const { opacity } = useClearOldBullet(didBulletStop);
-
-  // useEffect(() => {
-  //   const id = setTimeout(() => {
-  //     shoot();
-  //     clearTimeout(id);
-  //   }, 500);
-
-  //   return () => {
-  //     clearTimeout(id);
-  //   };
-  // }, [shoot]);
-
   return (
     <>
       <Circle
@@ -49,22 +34,7 @@ export default function Soldier({ initialCenter }: ISoldier) {
         radius={0.7}
         fillOpacity={1}
       />
-      {didBulletStop !== undefined && (
-        <>
-          <Plot.Parametric
-            t={[0, x]}
-            weight={2}
-            xy={(t: number) => bulletTrajectory(t)}
-            opacity={opacity}
-          />
-          <Circle
-            center={bulletTrajectory(x)}
-            radius={0.1}
-            fillOpacity={opacity}
-            strokeOpacity={opacity}
-          />
-        </>
-      )}
+      {element}
     </>
   );
 }
