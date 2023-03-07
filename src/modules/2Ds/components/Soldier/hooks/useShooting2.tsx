@@ -3,11 +3,12 @@ import { useBoundContext } from '@modules/2Ds/contexts/BoundContext';
 import { Circle, Plot, useStopwatch, type vec } from 'mafs';
 import * as math from 'mathjs';
 import { useSocket } from '@contexts/SocketContext';
-import { Subject, throttleTime } from 'rxjs';
+import { throttleTime } from 'rxjs';
 import { BULLET_ACTION } from '../events.enum';
 import { type SyncFlyDTO } from '../events.dto';
-import { doesPointTouchBound } from '../utils';
+import { calcultateTrajectory, doesPointTouchBound } from '../utils';
 import useClearOldBullet from './useClearOldBullet';
+import { useEventBus } from '@modules/2Ds/contexts/EventBusContext';
 
 type BulletMetaData = {
   equation: string;
@@ -15,31 +16,8 @@ type BulletMetaData = {
   basePosition: vec.Vector2;
 };
 
-const event$ = new Subject<{
-  action: BULLET_ACTION;
-  payload: unknown;
-}>();
-
-const calcultateTrajectory = (f: math.EvalFunction, basePosition: vec.Vector2) => {
-  // #region calculating trajectory
-  // theoretically
-  const fStartPointTheo = [0, f.evaluate({ x: 0 })];
-
-  // value deviation (base on the center)
-  const deltaX = basePosition[0] - fStartPointTheo[0];
-  const deltaY = basePosition[1] - fStartPointTheo[1];
-
-  // reality
-  const rX = (x: number) => x + deltaX;
-  const rY = (x: number) => (f.evaluate({ x }) as number) + deltaY;
-
-  const bulletTrajectory = (x: number) => [rX(x), rY(x)] as vec.Vector2;
-  // #endregion
-
-  return bulletTrajectory;
-};
-
 export default function useShooting() {
+  const event$ = useEventBus();
   const bound = useBoundContext();
   const { time, start, stop } = useStopwatch();
   const socket = useSocket();
@@ -68,8 +46,18 @@ export default function useShooting() {
       },
     });
 
+    // const bulletSub = event$.subscribe({
+    //   next({ action, payload }) {
+    //     if (action === BULLET_ACTION.COLLIDED_OBSTACLE) {
+    //       stop();
+    //       socket?.current?.emit(BULLET_ACTION.STOP);
+    //     }
+    //   },
+    // });
+
     return () => {
       shootingSub.unsubscribe();
+      // bulletSub.unsubscribe();
     };
   }, []);
 
@@ -111,9 +99,17 @@ export default function useShooting() {
     });
     // #endregion
 
+    // #region sync collide obstacle
+    const syncCollidedObstacle = socket?.current?.on(BULLET_ACTION.SYNC_COLLIDED_OBSTACLE, () => {
+      stop();
+      socket?.current?.emit(BULLET_ACTION.STOP);
+    });
+    // #endregion
+
     return () => {
       syncFly?.off();
       syncStop?.off();
+      syncCollidedObstacle?.off();
     };
   }, []);
 
@@ -134,8 +130,9 @@ export default function useShooting() {
         math.compile(bulletMetaData.current.equation),
         bulletMetaData.current.basePosition as vec.Vector2,
       );
-
-      if (doesPointTouchBound(bulletTrajectory(time), bound)) {
+      //
+      const touchData = doesPointTouchBound(bulletTrajectory(time), bound);
+      if (touchData) {
         stop();
         // calculate the exact point (later)
         // then pass to this event.
@@ -173,9 +170,6 @@ export default function useShooting() {
   );
 
   const { opacity } = useClearOldBullet(bulletData.didStop);
-  useEffect(() => {
-    console.log(bulletData.didStop);
-  }, [bulletData.didStop]);
 
   return {
     shoot,

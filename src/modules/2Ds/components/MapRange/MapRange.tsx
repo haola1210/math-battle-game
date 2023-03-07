@@ -11,6 +11,7 @@ export default function MapRange() {
         [xMax, yMax],
         [xMin, yMax],
       ]}
+      fillOpacity={0}
     />
   );
 }

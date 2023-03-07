@@ -5,6 +5,7 @@ import BoundContextProvider from '@modules/2Ds/contexts/BoundContext';
 import Soldier from '@modules/2Ds/components/Soldier';
 import MapRange from '@modules/2Ds/components/MapRange';
 import { useEventBus } from '@modules/2Ds/contexts/EventBusContext';
+import Obstacle from '@modules/2Ds/components/Obstacle';
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -82,6 +83,10 @@ function App() {
 
           <MapRange />
 
+          <Obstacle
+            position={[17, 20]}
+            r={5}
+          />
           <Soldier initialCenter={[10, 3]} />
         </Mafs>
       </BoundContextProvider>
