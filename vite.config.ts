@@ -12,6 +12,8 @@ export default defineConfig({
       "@interfaces": path.resolve(__dirname, "./src/interfaces"),
       "@modules": path.resolve(__dirname, "./src/modules"),
       "@contexts": path.resolve(__dirname, "./src/contexts"),
+      "@routes": path.resolve(__dirname, "./src/routes"),
+      "@pages": path.resolve(__dirname, "./src/pages"),
     }
   },
   server: {
