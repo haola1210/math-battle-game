@@ -26,6 +26,7 @@ module.exports = {
               '@typescript-eslint/naming-convention': 'off',
               '@typescript-eslint/no-confusing-void-expression': 'off',
               '@typescript-eslint/no-for-in-array': 'off',
+              "capitalized-comments": 'off'
             },
         }
     ],
@@ -53,6 +54,7 @@ module.exports = {
       "@typescript-eslint/naming-convention": "off",
       "@typescript-eslint/no-floating-promises": "off",
       "@typescript-eslint/restrict-template-expressions": "off",
-      "@typescript-eslint/unified-signatures": "off"
+      "@typescript-eslint/unified-signatures": "off",
+      "capitalized-comments": 'off'
     }
 }
