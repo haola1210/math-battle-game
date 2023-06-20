@@ -22,7 +22,8 @@
       "@interfaces/*": ["./interfaces/*"],
       "@modules/*": ["./modules/*"],
       "@contexts/*": ["./contexts/*"],
-
+      "@pages/*": ["./pages/*"],
+      "@routes/*": ["./routes/*"],
     }
   },
   "include": ["src"],
