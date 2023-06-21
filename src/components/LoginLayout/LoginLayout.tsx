@@ -1,24 +1,11 @@
 import { type ReactNode } from 'react';
-
+import './style.scss';
 interface ILoginLayoutProps {
   children: ReactNode;
 }
 
 const LoginLayout = ({ children }: ILoginLayoutProps) => {
-  return (
-    <div
-      style={{
-        background: '#2b2d42',
-        height: '100%',
-        color: '#edf2f4',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div className='login-layout'>{children}</div>;
 };
 
 export default LoginLayout;

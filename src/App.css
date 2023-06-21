@@ -2,6 +2,9 @@
 @import "mafs/core.css";
 @import "mafs/font.css";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   box-sizing: border-box;
