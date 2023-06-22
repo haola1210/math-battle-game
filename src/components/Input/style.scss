@@ -1,8 +1,7 @@
 input {
-  @apply w-full text-white;
   height: 30px;
-  background: #9a8c98;
   border-radius: 8px;
+  @apply w-full text-white bg-stone-400;
 }
 
 
