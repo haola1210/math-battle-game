@@ -2,11 +2,10 @@
   border: 2px solid #8d99ae;
   width: 40%;
   border-radius: 16px;
-  padding: 4px;
   gap: 20px;
   height: 40%;
 
-  @apply flex flex-col items-center justify-center;
+  @apply flex flex-col items-center justify-center p-1;
   .welcome__label {
     font-weight: 700;
     font-size: 30px;
