@@ -1,4 +1,7 @@
 /** @format */
+@import "mafs/core.css";
+@import "mafs/font.css";
+
 
 * {
   box-sizing: border-box;
