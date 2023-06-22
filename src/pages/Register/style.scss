@@ -1,0 +1,15 @@
+.register {
+  border: 2px solid #8d99ae;
+  width: 40%;
+  border-radius: 16px;
+  padding: 10px;
+  gap: 20px;
+  @apply flex flex-col items-center justify-center;
+  .register__label {
+    font-weight: 700;
+    font-size: 30px;
+  }
+  .register__input {
+    width: 70%;
+  }
+}
