@@ -1,6 +1,6 @@
 .room-item {
   @apply  bg-stone-600 h-20 p-1 rounded-lg flex flex-col;
-  &__roomate{
+  &__roommate{
     @apply flex items-end h-auto grow ;
     justify-content: space-between;
     width: 185px;

@@ -4,7 +4,7 @@ const RoomItem = () => {
   return (
     <div className='room-item'>
       <div>Room name</div>
-      <div className='room-item__roomate'>
+      <div className='room-item__roommate'>
         <div>huy beo</div>
         <div>1/2</div>
       </div>
