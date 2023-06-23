@@ -1,3 +1,8 @@
+
+.register-container {
+  @apply w-full h-screen flex items-center justify-center;
+}
+
 .register {
   border: 2px solid #8d99ae;
   width: 40%;
@@ -5,11 +10,11 @@
   padding: 10px;
   gap: 20px;
   @apply flex flex-col items-center justify-center;
-  .register__label {
+  &__label {
     font-weight: 700;
     font-size: 30px;
   }
-  .register__input {
+  &__input {
     width: 70%;
   }
 }

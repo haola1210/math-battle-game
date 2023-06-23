@@ -1,6 +1,8 @@
+import Lobby from '@pages/Lobby';
 import Login from '@pages/Login';
 import Main from '@pages/Main';
 import Register from '@pages/Register';
+import WaitingRoom from '@pages/WaitingRoom';
 import Welcome from '@pages/Welcome';
 import { Route, Routes } from 'react-router-dom';
 
@@ -22,6 +24,14 @@ const RoutesContainer = () => {
       <Route
         path='/welcome'
         element={<Welcome />}
+      />
+      <Route
+        path='/lobby'
+        element={<Lobby />}
+      />
+      <Route
+        path='/waiting-room'
+        element={<WaitingRoom />}
       />
     </Routes>
   );

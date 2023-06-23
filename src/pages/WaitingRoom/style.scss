@@ -1,0 +1,20 @@
+.waiting-room {
+  @apply w-full h-full flex flex-col gap-3 p-2;
+  &__header {
+    font-weight: 700;
+    font-size: 24px;
+  }
+  &__player-list{
+    @apply flex gap-4;
+
+  }
+  &__team {
+    @apply flex flex-col;
+    &--player{
+      @apply flex gap-1 flex-col;
+    }
+  }
+  &__waiting-list {
+    @apply flex gap-1 mb-2 flex-col;
+  }
+}

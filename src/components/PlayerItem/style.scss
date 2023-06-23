@@ -1,0 +1,8 @@
+.player-item {
+  width: 200px;
+  height: 70px;
+  @apply bg-stone-600 rounded-lg p-2 flex flex-col;
+  &__level{
+    @apply flex-wrap justify-end items-end flex grow;
+  }
+}

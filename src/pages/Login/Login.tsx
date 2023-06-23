@@ -1,25 +1,27 @@
 import Button from '@components/Button';
 import Input from '@components/Input';
-import LoginLayout from '@components/LoginLayout';
+import Layout from '@components/Layout';
 import './style.scss';
 
 const Login = () => {
   return (
-    <LoginLayout>
-      <div className='login'>
-        <div className='login__label'>Login</div>
-        <div className='login__input'>
-          <Input label={'Username'} />
-        </div>
-        <div className='login__input'>
-          <Input label={'Password'} />
-        </div>
-        <div className='login__btn'>
-          <Button>Login</Button>
-          <Button>Register</Button>
+    <Layout>
+      <div className='login-container'>
+        <div className='login'>
+          <div className='login__label'>Login</div>
+          <div className='login__input'>
+            <Input label={'Username'} />
+          </div>
+          <div className='login__input'>
+            <Input label={'Password'} />
+          </div>
+          <div className='login__btn'>
+            <Button>Login</Button>
+            <Button>Register</Button>
+          </div>
         </div>
       </div>
-    </LoginLayout>
+    </Layout>
   );
 };
 
