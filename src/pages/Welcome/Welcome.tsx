@@ -1,12 +1,12 @@
 import Button from '@components/Button';
-import LoginLayout from '@components/LoginLayout';
+import ILayoutPropsLayout from '@components/Layout';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
 
 const Welcome = () => {
   const navigate = useNavigate();
   return (
-    <LoginLayout>
+    <ILayoutPropsLayout>
       <div className='welcome'>
         <div className='welcome__label'>Welcome</div>
         <div className='welcome__btns'>
@@ -14,7 +14,7 @@ const Welcome = () => {
           <Button onClick={() => navigate('/register')}>Register</Button>
         </div>
       </div>
-    </LoginLayout>
+    </ILayoutPropsLayout>
   );
 };
 

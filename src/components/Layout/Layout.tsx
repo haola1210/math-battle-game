@@ -1,11 +1,11 @@
 import { type ReactNode } from 'react';
 import './style.scss';
-interface ILoginLayoutProps {
+interface ILayoutProps {
   children: ReactNode;
 }
 
-const LoginLayout = ({ children }: ILoginLayoutProps) => {
+const Layout = ({ children }: ILayoutProps) => {
   return <div className='login-layout'>{children}</div>;
 };
 
-export default LoginLayout;
+export default Layout;

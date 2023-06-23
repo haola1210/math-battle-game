@@ -1,0 +1,19 @@
+.waiting-room {
+  @apply w-full h-full flex flex-col gap-3 p-2;
+  .waiting-room__header {
+    font-weight: 700;
+    font-size: 24px;
+  }
+  .waiting-room__player-list{
+    @apply flex gap-2;
+    .waiting-room__team {
+      @apply flex flex-col;
+      .waiting-room__team-player{
+        @apply flex gap-1;
+      }
+    }
+  }
+  .waiting-room__waiting-list {
+    @apply flex gap-1 mb-2;
+  }
+}

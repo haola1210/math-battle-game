@@ -1,11 +1,11 @@
 import Button from '@components/Button';
 import Input from '@components/Input';
-import LoginLayout from '@components/LoginLayout';
+import Layout from '@components/Layout';
 import './style.scss';
 
 const Login = () => {
   return (
-    <LoginLayout>
+    <Layout>
       <div className='login'>
         <div className='login__label'>Login</div>
         <div className='login__input'>
@@ -19,7 +19,7 @@ const Login = () => {
           <Button>Register</Button>
         </div>
       </div>
-    </LoginLayout>
+    </Layout>
   );
 };
 

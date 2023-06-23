@@ -1,0 +1,21 @@
+.rooms {
+  @apply w-full ;
+  min-height: 100%;
+  .rooms__header {
+    font-size: 24;
+    font-weight: 700;
+  }
+  .rooms__create-btn{
+    width: 40%;
+    @apply p-2;
+  }
+  .rooms__room-list{
+    @apply flex flex-wrap gap-2 p-2;
+
+    > div {
+      height: 25%; /* Chia đều chiều cao thành bốn hàng */
+      box-sizing: border-box; /* Đảm bảo padding và border không làm thay đổi kích thước */
+      border: 1px solid black;
+    }
+  }
+}

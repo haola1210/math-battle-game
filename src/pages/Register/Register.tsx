@@ -1,11 +1,11 @@
 import Button from '@components/Button';
 import Input from '@components/Input';
-import LoginLayout from '@components/LoginLayout';
+import Layout from '@components/Layout';
 import './style.scss';
 
 const Register = () => {
   return (
-    <LoginLayout>
+    <Layout>
       <div className='register'>
         <div className='register__label'>Register</div>
         <div className='register__input'>
@@ -18,7 +18,7 @@ const Register = () => {
           <Button>Register</Button>
         </div>
       </div>
-    </LoginLayout>
+    </Layout>
   );
 };
 
