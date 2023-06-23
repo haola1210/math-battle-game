@@ -2,11 +2,14 @@ import './style.scss';
 
 interface IButtonProps extends React.ComponentPropsWithoutRef<'button'> {}
 
-const Button = ({ children, ...rest }: IButtonProps) => {
+const Button = ({ children, className, ...rest }: IButtonProps) => {
   return (
-    <div className='btn'>
-      <button {...rest}>{children}</button>
-    </div>
+    <button
+      className={`${className} btn`}
+      {...rest}
+    >
+      {children}
+    </button>
   );
 };
 

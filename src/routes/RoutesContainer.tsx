@@ -1,7 +1,7 @@
+import Lobby from '@pages/Lobby';
 import Login from '@pages/Login';
 import Main from '@pages/Main';
 import Register from '@pages/Register';
-import Rooms from '@pages/Rooms';
 import WaitingRoom from '@pages/WaitingRoom';
 import Welcome from '@pages/Welcome';
 import { Route, Routes } from 'react-router-dom';
@@ -26,8 +26,8 @@ const RoutesContainer = () => {
         element={<Welcome />}
       />
       <Route
-        path='/rooms'
-        element={<Rooms />}
+        path='/lobby'
+        element={<Lobby />}
       />
       <Route
         path='/waiting-room'

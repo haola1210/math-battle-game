@@ -11,7 +11,7 @@ const WaitingRoom = () => {
         <div className='waiting-room__player-list'>
           <div className='waiting-room__team'>
             <div>Team 1</div>
-            <div className='waiting-room__team-player'>
+            <div className='waiting-room__team--player'>
               <PlayerItem />
               <PlayerItem />
             </div>
@@ -21,7 +21,7 @@ const WaitingRoom = () => {
           </div>
           <div className='waiting-room__team'>
             <div>Team 2</div>
-            <div className='waiting-room__team-player'>
+            <div className='waiting-room__team--player'>
               <PlayerItem />
               <PlayerItem />
             </div>

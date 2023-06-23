@@ -1,3 +1,7 @@
+.login-container {
+  @apply w-full h-screen flex items-center justify-center;
+}
+
 .login {
   border: 2px solid #8d99ae;
   width: 40%;
@@ -5,14 +9,14 @@
   padding: 10px;
   gap: 20px;
   @apply flex flex-col items-center justify-center;
-  .login__label {
+  &__label {
     font-weight: 700;
     font-size: 30px;
   }
-  .login__input {
+  &__input {
     width: 70%;
   }
-  .login__btn {
+  &__btn {
     gap: 20px;
     @apply flex;
   }

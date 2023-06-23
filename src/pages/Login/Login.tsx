@@ -6,17 +6,19 @@ import './style.scss';
 const Login = () => {
   return (
     <Layout>
-      <div className='login'>
-        <div className='login__label'>Login</div>
-        <div className='login__input'>
-          <Input label={'Username'} />
-        </div>
-        <div className='login__input'>
-          <Input label={'Password'} />
-        </div>
-        <div className='login__btn'>
-          <Button>Login</Button>
-          <Button>Register</Button>
+      <div className='login-container'>
+        <div className='login'>
+          <div className='login__label'>Login</div>
+          <div className='login__input'>
+            <Input label={'Username'} />
+          </div>
+          <div className='login__input'>
+            <Input label={'Password'} />
+          </div>
+          <div className='login__btn'>
+            <Button>Login</Button>
+            <Button>Register</Button>
+          </div>
         </div>
       </div>
     </Layout>

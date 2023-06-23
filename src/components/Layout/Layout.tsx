@@ -5,7 +5,7 @@ interface ILayoutProps {
 }
 
 const Layout = ({ children }: ILayoutProps) => {
-  return <div className='login-layout'>{children}</div>;
+  return <div className='layout'>{children}</div>;
 };
 
 export default Layout;

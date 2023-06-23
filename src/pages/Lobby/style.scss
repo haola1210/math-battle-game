@@ -1,15 +1,15 @@
-.rooms {
+.lobby {
   @apply w-full ;
   min-height: 100%;
-  .rooms__header {
+  &__header {
     font-size: 24;
     font-weight: 700;
   }
-  .rooms__create-btn{
+  &__create-btn{
     width: 40%;
     @apply p-2;
   }
-  .rooms__room-list{
+  &__room-list{
     @apply flex flex-wrap gap-2 p-2;
 
     > div {
