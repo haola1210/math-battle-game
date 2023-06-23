@@ -1,4 +1,5 @@
 import Layout from '@components/Layout';
+import Map from '@components/Map';
 import PlayerItem from '@components/PlayerItem';
 import './style.scss';
 
@@ -14,6 +15,9 @@ const WaitingRoom = () => {
               <PlayerItem />
               <PlayerItem />
             </div>
+          </div>
+          <div className='waiting-room__map'>
+            <Map />
           </div>
           <div className='waiting-room__team'>
             <div>Team 2</div>

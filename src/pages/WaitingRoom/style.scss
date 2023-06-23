@@ -5,15 +5,15 @@
     font-size: 24px;
   }
   .waiting-room__player-list{
-    @apply flex gap-2;
+    @apply flex gap-4;
     .waiting-room__team {
       @apply flex flex-col;
       .waiting-room__team-player{
-        @apply flex gap-1;
+        @apply flex gap-1 flex-col;
       }
     }
   }
   .waiting-room__waiting-list {
-    @apply flex gap-1 mb-2;
+    @apply flex gap-1 mb-2 flex-col;
   }
 }

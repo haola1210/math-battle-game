@@ -1,6 +1,6 @@
 .player-item {
   width: 200px;
-  height: 200px;
+  height: 70px;
   @apply bg-stone-600 rounded-lg p-2 flex flex-col;
   .play-item__level{
     @apply flex-wrap justify-end items-end flex grow;
