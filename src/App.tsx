@@ -1,9 +1,16 @@
+import AuthContextProvider from '@contexts/AuthContext';
 import RoutesContainer from '@routes/RoutesContainer';
-import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  return <RoutesContainer />;
+  return (
+    <AuthContextProvider>
+      <ToastContainer></ToastContainer>
+      <RoutesContainer />
+    </AuthContextProvider>
+  );
 }
 
 export default App;

@@ -24,6 +24,11 @@
       "@contexts/*": ["./contexts/*"],
       "@pages/*": ["./pages/*"],
       "@routes/*": ["./routes/*"],
+      "@utils/*": ["./utils/*"],
+      "@constants/*": ["./constants/*"],
+      "@services/*": ["./services/*"],
+      "@context/*": ["./context/*"],
+      "@axios/*": ["./axios/*"],
     }
   },
   "include": ["src"],
