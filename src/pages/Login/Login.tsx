@@ -14,11 +14,11 @@ const shema = yup.object({
     .string()
     .required('Username must be required')
     .max(24, `Username must less than 24 characters`)
-    .min(5, `Username must more than 5 characters`),
+    .min(6, `Username must more than 5 characters`),
   password: yup
     .string()
     .required('Password must be required')
-    .min(7, `Password must more than 7 characters`),
+    .min(8, `Password must more than 7 characters`),
 });
 
 const Login = () => {
@@ -44,7 +44,6 @@ const Login = () => {
         localStorage.removeItem('oldPath');
       } catch (error) {
         const errorMessage = convertError(error);
-        console.log(errorMessage);
         formik.setErrors(errorMessage);
       }
     },

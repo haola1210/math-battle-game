@@ -1,7 +1,7 @@
 import { useAuthContext } from '@contexts/AuthContext';
+import { me } from '@services/user.service';
 import { Suspense } from 'react';
 import { Await, defer, Navigate, Outlet } from 'react-router-dom';
-import { me } from 'services/user.service';
 
 const PublicRoute = () => {
   const auth = useAuthContext();
