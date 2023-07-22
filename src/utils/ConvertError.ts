@@ -6,7 +6,6 @@ import { ERROR_TYPE } from '../constants/error-type';
 export const convertError = (error: any) => {
   const data = error?.response?.data;
   const errorType = data?.error;
-  console.log({ errorType }, data?.message);
 
   let castedErrors = {};
   if (errorType === ERROR_TYPE.CONFLICT) {
