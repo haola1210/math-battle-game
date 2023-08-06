@@ -14,6 +14,11 @@ export default defineConfig({
       "@contexts": path.resolve(__dirname, "./src/contexts"),
       "@routes": path.resolve(__dirname, "./src/routes"),
       "@pages": path.resolve(__dirname, "./src/pages"),
+      "@utils": path.resolve(__dirname, "./src/utils"),
+      "@constants": path.resolve(__dirname, "./src/constants"),
+      "@services": path.resolve(__dirname, "./src/services"),
+      "@context": path.resolve(__dirname, "./src/context"),
+      "@axios": path.resolve(__dirname, "./src/axios"),
     }
   },
   server: {

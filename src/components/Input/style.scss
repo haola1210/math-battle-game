@@ -2,6 +2,11 @@ input {
   height: 30px;
   border-radius: 8px;
   @apply w-full text-white bg-stone-400;
+
+}
+.error-message {
+  font-size: 12px;
+  @apply text-red-500
 }
 
 

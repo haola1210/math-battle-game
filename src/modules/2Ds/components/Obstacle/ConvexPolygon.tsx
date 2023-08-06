@@ -1,18 +1,22 @@
-import { useEventBus } from '@modules/2Ds/contexts/EventBusContext';
-import { Circle, type vec } from 'mafs';
-import { useEffect, useState } from 'react';
-import { BULLET_ACTION } from '../Soldier/events.enum';
-import { type SyncFlyDTO } from '../Soldier/events.dto';
-import * as math from 'mathjs';
-import { calcultateTrajectory } from '../Soldier/utils';
-import { didCollide } from './utils';
 import { useSocket } from '@contexts/SocketContext';
+import { useEventBus } from '@modules/2Ds/contexts/EventBusContext';
+import { Circle, Polygon, type vec } from 'mafs';
+import { useEffect, useState } from 'react';
+import { type SyncFlyDTO } from '../Soldier/events.dto';
+import { BULLET_ACTION } from '../Soldier/events.enum';
+import {
+  calculateRegularPolygonVertices,
+  didCollideCircle,
+  didCollideConvexPolygon,
+} from './utils';
+import * as math from 'mathjs';
 import { v4 as uuid } from 'uuid';
+import { calcultateTrajectory } from '../Soldier/utils';
 
-interface IObstacle {
-  color?: string;
+interface IConvexPolygonProps {
   position: vec.Vector2;
   r: number;
+  sides: number;
 }
 
 interface Hole {
@@ -21,8 +25,7 @@ interface Hole {
   point: vec.Vector2;
 }
 
-export default function Obstacle({ color, position, r }: IObstacle) {
-  //
+export default function ConvexPolygon({ position, r, sides }: IConvexPolygonProps) {
   const event$ = useEventBus();
   const socket = useSocket();
   const [holes, setHoles] = useState<Hole[]>([]);
@@ -60,14 +63,16 @@ export default function Obstacle({ color, position, r }: IObstacle) {
           const bulletTrajectory = calcultateTrajectory(f, basePosition);
 
           const pVec = bulletTrajectory(theoX);
-          //
+
+          console.log(pVec);
 
           const isInsideAnyHole = holes
-            .map(({ point, r }) => didCollide(point, r, pVec))
+            .map(({ point, r }) => didCollideCircle(point, r, pVec))
             .some((v) => v);
 
-          if (!isInsideAnyHole && didCollide(position, r, pVec)) {
-            console.log('collided obstacle');
+          const polygoinVertices = calculateRegularPolygonVertices(position, sides, r);
+
+          if (!isInsideAnyHole && didCollideConvexPolygon(polygoinVertices, pVec)) {
             socket?.current?.emit(BULLET_ACTION.COLLIDED_OBSTACLE, payload);
           }
         }
@@ -81,11 +86,10 @@ export default function Obstacle({ color, position, r }: IObstacle) {
 
   return (
     <>
-      <Circle
-        center={position}
-        radius={r}
+      <Polygon
+        points={calculateRegularPolygonVertices(position, sides, r)}
+        color={'white'}
         fillOpacity={1}
-        color={color}
       />
       {holes.map(({ r, point, id }) => (
         <Circle
