@@ -1,5 +1,5 @@
 import MapRange from '@modules/2Ds/components/MapRange';
-import Obstacle from '@modules/2Ds/components/Obstacle';
+import { Circle, ConvexPolygon } from '@modules/2Ds/components/Obstacle';
 import Soldier from '@modules/2Ds/components/Soldier';
 import BoundContextProvider from '@modules/2Ds/contexts/BoundContext';
 import { useEventBus } from '@modules/2Ds/contexts/EventBusContext';
@@ -80,11 +80,16 @@ const Main = () => {
 
           <MapRange />
 
-          <Obstacle
+          <Circle
             position={[17, 20]}
             r={5}
           />
-          <Soldier initialCenter={[10, 3]} />
+          <ConvexPolygon
+            position={[-17, 10]}
+            r={4}
+            sides={3}
+          />
+          <Soldier initialCenter={[-22, 3]} />
         </Mafs>
       </BoundContextProvider>
     </div>

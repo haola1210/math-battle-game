@@ -27,16 +27,16 @@ const RoutesContainer = () => {
       </Route>
       <Route element={<PrivateRoute />}>
         <Route
+          path='/'
+          element={<Main />}
+        />
+        <Route
           path='/lobby'
           element={<Lobby />}
         />
         <Route
           path='/waiting-room'
           element={<WaitingRoom />}
-        />
-        <Route
-          path='/'
-          element={<Main />}
         />
       </Route>
     </Routes>
