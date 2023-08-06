@@ -88,7 +88,7 @@ export default function ConvexPolygon({ position, r, sides }: IConvexPolygonProp
     <>
       <Polygon
         points={calculateRegularPolygonVertices(position, sides, r)}
-        color={'blue'}
+        color={'white'}
         fillOpacity={1}
       />
       {holes.map(({ r, point, id }) => (
@@ -96,7 +96,7 @@ export default function ConvexPolygon({ position, r, sides }: IConvexPolygonProp
           center={point}
           radius={r}
           fillOpacity={1}
-          color='white'
+          color='black'
           key={id}
         />
       ))}
