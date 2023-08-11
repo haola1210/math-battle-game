@@ -1,19 +1,15 @@
 import { useSocket } from '@contexts/SocketContext';
 import { useEventBus } from '@modules/2Ds/contexts/EventBusContext';
-import { Circle, Polygon, type vec } from 'mafs';
+import { Circle, Polygon as MafsPolygon, type PolygonProps, type vec } from 'mafs';
 import { useEffect, useState } from 'react';
 import { type SyncFlyDTO } from '../Soldier/events.dto';
 import { BULLET_ACTION } from '../Soldier/events.enum';
-import { calculateConvexPolygonVertices, didCollideCircle, didCollideConvexPolygon } from './utils';
+import { didCollideCircle, didCollidePolygon } from './utils';
 import * as math from 'mathjs';
 import { v4 as uuid } from 'uuid';
 import { calcultateTrajectory } from '../Soldier/utils';
 
-interface IConvexPolygonProps {
-  position: vec.Vector2;
-  r: number;
-  sides: number;
-}
+interface IPolygonProps extends PolygonProps {}
 
 interface Hole {
   id: string;
@@ -21,7 +17,7 @@ interface Hole {
   point: vec.Vector2;
 }
 
-export default function ConvexPolygon({ position, r, sides }: IConvexPolygonProps) {
+export default function Polygon({ points }: IPolygonProps) {
   const event$ = useEventBus();
   const socket = useSocket();
   const [holes, setHoles] = useState<Hole[]>([]);
@@ -64,9 +60,7 @@ export default function ConvexPolygon({ position, r, sides }: IConvexPolygonProp
             .map(({ point, r }) => didCollideCircle(point, r, pVec))
             .some((v) => v);
 
-          const polygoinVertices = calculateConvexPolygonVertices(position, sides, r);
-
-          if (!isInsideAnyHole && didCollideConvexPolygon(polygoinVertices, pVec)) {
+          if (!isInsideAnyHole && didCollidePolygon(pVec, points)) {
             socket?.current?.emit(BULLET_ACTION.COLLIDED_OBSTACLE, payload);
           }
         }
@@ -80,8 +74,8 @@ export default function ConvexPolygon({ position, r, sides }: IConvexPolygonProp
 
   return (
     <>
-      <Polygon
-        points={calculateConvexPolygonVertices(position, sides, r)}
+      <MafsPolygon
+        points={points}
         color={'white'}
         fillOpacity={1}
       />

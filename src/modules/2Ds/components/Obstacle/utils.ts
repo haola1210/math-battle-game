@@ -11,7 +11,7 @@ export const didCollideCircle = (cVec: vec.Vector2, r: number, pVec: vec.Vector2
 };
 
 // Function to calculate the vertices of a regular polygon
-export function calculateRegularPolygonVertices(
+export function calculateConvexPolygonVertices(
   center: vec.Vector2,
   sides: number,
   radius: number,
@@ -48,3 +48,24 @@ export const didCollideConvexPolygon = (polygon: vec.Vector2[], point: vec.Vecto
 
   return isInside;
 };
+
+export function didCollidePolygon(point: vec.Vector2, polygon: vec.Vector2[]): boolean {
+  let isInside = false;
+  const n = polygon.length;
+
+  for (let i = 0, j = n - 1; i < n; j = i++) {
+    const xi = polygon[i][0];
+    const yi = polygon[i][1];
+    const xj = polygon[j][0];
+    const yj = polygon[j][1];
+
+    const intersect =
+      yi > point[1] !== yj > point[1] && point[0] < ((xj - xi) * (point[1] - yi)) / (yj - yi) + xi;
+
+    if (intersect) {
+      isInside = !isInside;
+    }
+  }
+
+  return isInside;
+}
