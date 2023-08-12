@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import './style.scss';
 import { login } from '@services/auth.service';
 import { convertError } from '@utils/ConvertError';
+import { Link } from '@constants/link';
 
 const shema = yup.object({
   username: yup
@@ -40,7 +41,7 @@ const Login = () => {
         const { accessToken } = await login(user);
         localStorage.setItem('access_token', accessToken);
         toast('Login success!');
-        navigate(localStorage.getItem('oldPath') ?? `/`, { replace: true });
+        navigate(localStorage.getItem('oldPath') ?? Link.LOBBY, { replace: true });
         localStorage.removeItem('oldPath');
       } catch (error) {
         const errorMessage = convertError(error);

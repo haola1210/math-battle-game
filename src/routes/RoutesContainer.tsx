@@ -1,3 +1,4 @@
+import { Link } from '@constants/link';
 import Lobby from '@pages/Lobby';
 import Login from '@pages/Login';
 import Main from '@pages/Main';
@@ -13,29 +14,29 @@ const RoutesContainer = () => {
     <Routes>
       <Route element={<PublicRoute />}>
         <Route
-          path='/login'
+          path={Link.LOGIN}
           element={<Login />}
         />
         <Route
-          path='/register'
+          path={Link.REGISTER}
           element={<Register />}
         />
         <Route
-          path='/welcome'
+          path={Link.WELCOME}
           element={<Welcome />}
         />
       </Route>
       <Route element={<PrivateRoute />}>
         <Route
-          path='/lobby'
+          path={Link.LOBBY}
           element={<Lobby />}
         />
         <Route
-          path='/'
+          path={Link.MAIN}
           element={<Main />}
         />
         <Route
-          path='/waiting-room'
+          path={Link.WAITING_ROOM}
           element={<WaitingRoom />}
         />
       </Route>
