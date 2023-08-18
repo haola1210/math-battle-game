@@ -1,9 +1,14 @@
 import Layout from '@components/Layout';
 import Map from '@components/Map';
 import PlayerItem from '@components/PlayerItem';
+import { useSocket } from '@contexts/SocketContext';
+import { useEffect } from 'react';
 import './style.scss';
 
 const WaitingRoom = () => {
+  const socket = useSocket();
+
+  useEffect(() => {}, []);
   return (
     <Layout>
       <div className='waiting-room'>

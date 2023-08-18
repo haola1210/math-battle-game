@@ -1,4 +1,4 @@
-export enum Link {
+export enum LINK {
   LOGIN = '/login',
   REGISTER = '/register',
   WELCOME = '/welcome',
