@@ -16,6 +16,7 @@ const PrivateRoute = () => {
         try {
           const user = await me();
           console.log(user);
+
           auth.login?.(user);
         } catch (error) {
           localStorage.setItem(`oldPath`, location.pathname);

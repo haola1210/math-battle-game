@@ -1,12 +1,18 @@
 import './style.scss';
 
-const RoomItem = () => {
+interface IRoomItem {
+  ownerName?: string;
+  numOfMember?: number;
+  room_name?: string;
+}
+
+const RoomItem = ({ ownerName, numOfMember, room_name }: IRoomItem) => {
   return (
     <div className='room-item'>
-      <div>Room name</div>
+      <div>{room_name}</div>
       <div className='room-item__roommate'>
-        <div>huy beo</div>
-        <div>1/2</div>
+        <div>{ownerName}</div>
+        <div>{numOfMember}/4</div>
       </div>
     </div>
   );
