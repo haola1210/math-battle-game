@@ -15,7 +15,6 @@ const PrivateRoute = () => {
       if (auth.user === undefined) {
         try {
           const user = await me();
-          console.log(user);
 
           auth.login?.(user);
         } catch (error) {

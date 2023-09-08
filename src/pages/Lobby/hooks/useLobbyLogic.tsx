@@ -35,8 +35,6 @@ export const useLobbyLogic = () => {
     },
   });
 
-  console.log(roomList);
-
   // create room
   useEffect(() => {
     socket?.current?.on(
@@ -44,24 +42,34 @@ export const useLobbyLogic = () => {
       async ({ user, room }: { user: IUser; room: IRoom }) => {
         if (user.username === auth.user?.username) {
           navigate(`${LINK.WAITING_ROOM}/${room._id}`);
+          toast(`Create ${room.room_name} success !`);
         } else {
           const tmpList = [...roomList, room];
-          console.log({ tmpList, roomList });
           setRoomList(tmpList);
         }
       },
     );
+
+    return () => {
+      socket?.current?.off();
+    };
+  }, [roomList]);
+
+  useEffect(() => {
     socket?.current?.on(USER_EVENT.CREATE_ROOM_ERROR, (error) => {
-      console.log(error);
       toast('Something went wrong!');
     });
-  }, [roomList]);
+    return () => {
+      socket?.current?.off();
+    };
+  }, []);
 
   // join room
   useEffect(() => {
     socket?.current?.on(
       USER_EVENT.JOIN_ROOM_FEEDBACK_LOBBY,
       async ({ room, user_joined }: { room: IRoom; user_joined: IUser }) => {
+        console.log({ room, user_joined });
         if (user_joined.username === auth.user?.username) {
           navigate(`${LINK.WAITING_ROOM}/${room._id}`);
         } else {
@@ -70,7 +78,10 @@ export const useLobbyLogic = () => {
         }
       },
     );
-  }, [roomList]);
+    return () => {
+      socket?.current?.off();
+    };
+  }, []);
 
   useEffect(() => {
     iIFE(async () => {

@@ -1,11 +1,11 @@
 import Layout from '@components/Layout';
 import Map from '@components/Map';
 import PlayerItem from '@components/PlayerItem';
-import { useEffect } from 'react';
 import './style.scss';
+import useWaitingRoomLogic from './hooks/useWaitingRoomLogic';
 
 const WaitingRoom = () => {
-  useEffect(() => {}, []);
+  const { roommate } = useWaitingRoomLogic();
   return (
     <Layout>
       <div className='waiting-room'>
