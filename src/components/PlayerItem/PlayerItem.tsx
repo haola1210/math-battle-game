@@ -1,10 +1,15 @@
 import './style.scss';
 
-const PlayerItem = () => {
+interface IPlayerItemProps {
+  playerName?: string;
+  isEmptySlot?: boolean;
+}
+
+const PlayerItem = ({ playerName }: IPlayerItemProps) => {
   return (
     <div className='player-item'>
-      <div>Huybeo</div>
-      <div className='play-item__level'>2</div>
+      <div>{playerName}</div>
+      <div className='play-item__level'></div>
     </div>
   );
 };
