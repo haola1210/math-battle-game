@@ -5,10 +5,10 @@ interface IPlayerItemProps {
   isEmptySlot?: boolean;
 }
 
-const PlayerItem = ({ playerName }: IPlayerItemProps) => {
+const PlayerItem = ({ playerName, isEmptySlot }: IPlayerItemProps) => {
   return (
     <div className='player-item'>
-      <div>{playerName}</div>
+      <div>{isEmptySlot ? `` : playerName}</div>
       <div className='play-item__level'></div>
     </div>
   );

@@ -6,11 +6,15 @@ import { useLobbyLogic } from './hooks/useLobbyLogic';
 import './style.scss';
 
 const Lobby = () => {
-  const { handleChangeValue, handleSubmitForm, handleJoinRoom, formik, roomList } = useLobbyLogic();
+  const { handleChangeValue, handleSubmitForm, handleJoinRoom, formik, roomList, auth } =
+    useLobbyLogic();
   return (
     <Layout>
       <div className='lobby'>
-        <div className='lobby__header'>Room List</div>
+        <div className='lobby__header'>
+          <div>Room List</div>
+          <div>Hello {auth.user?.username}</div>
+        </div>
         <div className='lobby__create-btn'>
           <Input
             label='Input room name'
