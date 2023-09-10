@@ -4,6 +4,9 @@
   &__header {
     font-size: 24;
     font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
   }
   &__create-btn{
     width: 40%;

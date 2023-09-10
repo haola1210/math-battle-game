@@ -1,4 +1,4 @@
-import { IUser } from '@interfaces/user.interface';
+import { type IUser } from '@interfaces/user.interface';
 import { getRoomInfo } from '@services/room.service';
 import { iIFE } from '@utils/IIFE';
 import { useEffect, useState } from 'react';
@@ -14,7 +14,6 @@ const useWaitingRoomLogic = () => {
       setRoommate(data.users);
     });
   }, []);
-  console.log(room_id);
   return { roommate };
 };
 

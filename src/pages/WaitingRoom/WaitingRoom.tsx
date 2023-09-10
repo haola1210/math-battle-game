@@ -3,6 +3,8 @@ import Map from '@components/Map';
 import PlayerItem from '@components/PlayerItem';
 import './style.scss';
 import useWaitingRoomLogic from './hooks/useWaitingRoomLogic';
+import { addUsersToTeam } from './utils';
+import { TEAM } from '@constants/team';
 
 const WaitingRoom = () => {
   const { roommate } = useWaitingRoomLogic();
@@ -14,8 +16,20 @@ const WaitingRoom = () => {
           <div className='waiting-room__team'>
             <div>Team 1</div>
             <div className='waiting-room__team--player'>
-              <PlayerItem />
-              <PlayerItem />
+              {addUsersToTeam(roommate, TEAM.ONE).map((item, index) =>
+                item === '' ? (
+                  <PlayerItem
+                    isEmptySlot
+                    key={index}
+                  />
+                ) : (
+                  <PlayerItem
+                    playerName={item.username}
+                    isEmptySlot={false}
+                    key={index}
+                  />
+                ),
+              )}
             </div>
           </div>
           <div className='waiting-room__map'>
@@ -24,8 +38,20 @@ const WaitingRoom = () => {
           <div className='waiting-room__team'>
             <div>Team 2</div>
             <div className='waiting-room__team--player'>
-              <PlayerItem />
-              <PlayerItem />
+              {addUsersToTeam(roommate, TEAM.TWO).map((item, index) =>
+                item === '' ? (
+                  <PlayerItem
+                    isEmptySlot
+                    key={index}
+                  />
+                ) : (
+                  <PlayerItem
+                    playerName={item.username}
+                    isEmptySlot={false}
+                    key={index}
+                  />
+                ),
+              )}
             </div>
           </div>
         </div>

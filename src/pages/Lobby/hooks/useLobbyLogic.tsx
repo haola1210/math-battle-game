@@ -40,6 +40,8 @@ export const useLobbyLogic = () => {
     socket?.current?.on(
       USER_EVENT.CREATE_ROOM_FEEDBACK,
       async ({ user, room }: { user: IUser; room: IRoom }) => {
+        console.log('here CREATE_ROOM_FEEDBACK ');
+
         if (user.username === auth.user?.username) {
           navigate(`${LINK.WAITING_ROOM}/${room._id}`);
           toast(`Create ${room.room_name} success !`);
@@ -53,7 +55,7 @@ export const useLobbyLogic = () => {
     return () => {
       socket?.current?.off();
     };
-  }, [roomList]);
+  }, []);
 
   useEffect(() => {
     socket?.current?.on(USER_EVENT.CREATE_ROOM_ERROR, (error) => {
@@ -69,7 +71,8 @@ export const useLobbyLogic = () => {
     socket?.current?.on(
       USER_EVENT.JOIN_ROOM_FEEDBACK_LOBBY,
       async ({ room, user_joined }: { room: IRoom; user_joined: IUser }) => {
-        console.log({ room, user_joined });
+        console.log('here JOIN_ROOM_FEEDBACK_LOBBY ');
+
         if (user_joined.username === auth.user?.username) {
           navigate(`${LINK.WAITING_ROOM}/${room._id}`);
         } else {
@@ -78,6 +81,7 @@ export const useLobbyLogic = () => {
         }
       },
     );
+
     return () => {
       socket?.current?.off();
     };
@@ -101,6 +105,8 @@ export const useLobbyLogic = () => {
   };
 
   const handleJoinRoom = (room_id: string) => {
+    console.log('here');
+
     const payload = {
       user_id: auth.user?._id,
       room_id,
@@ -108,5 +114,5 @@ export const useLobbyLogic = () => {
     socket?.current?.emit(USER_EVENT.JOIN_ROOM, payload);
   };
 
-  return { handleChangeValue, handleSubmitForm, handleJoinRoom, formik, roomList };
+  return { handleChangeValue, handleSubmitForm, handleJoinRoom, formik, roomList, auth };
 };
