@@ -40,8 +40,6 @@ export const useLobbyLogic = () => {
     socket?.current?.on(
       USER_EVENT.CREATE_ROOM_FEEDBACK,
       async ({ user, room }: { user: IUser; room: IRoom }) => {
-        console.log('here CREATE_ROOM_FEEDBACK ');
-
         if (user.username === auth.user?.username) {
           navigate(`${LINK.WAITING_ROOM}/${room._id}`);
           toast(`Create ${room.room_name} success !`);
@@ -71,10 +69,9 @@ export const useLobbyLogic = () => {
     socket?.current?.on(
       USER_EVENT.JOIN_ROOM_FEEDBACK_LOBBY,
       async ({ room, user_joined }: { room: IRoom; user_joined: IUser }) => {
-        console.log('here JOIN_ROOM_FEEDBACK_LOBBY ');
-
         if (user_joined.username === auth.user?.username) {
           navigate(`${LINK.WAITING_ROOM}/${room._id}`);
+          toast('Join room success!');
         } else {
           const tmpList = roomList.map((item) => (item._id === room._id ? room : item));
           setRoomList(tmpList);
@@ -90,7 +87,6 @@ export const useLobbyLogic = () => {
   useEffect(() => {
     iIFE(async () => {
       const roomList = await getRoomList();
-
       setRoomList(roomList);
     });
   }, []);
@@ -105,8 +101,6 @@ export const useLobbyLogic = () => {
   };
 
   const handleJoinRoom = (room_id: string) => {
-    console.log('here');
-
     const payload = {
       user_id: auth.user?._id,
       room_id,
