@@ -5,9 +5,10 @@ import './style.scss';
 import useWaitingRoomLogic from './hooks/useWaitingRoomLogic';
 import { addUsersToTeam } from './utils';
 import { TEAM } from '@constants/team';
+import Button from '@components/Button';
 
 const WaitingRoom = () => {
-  const { roommate } = useWaitingRoomLogic();
+  const { roommate, auth } = useWaitingRoomLogic();
   return (
     <Layout>
       <div className='waiting-room'>
@@ -27,6 +28,7 @@ const WaitingRoom = () => {
                     playerName={item.username}
                     isEmptySlot={false}
                     key={index}
+                    isCurrentUser={item.username === auth.user?.username}
                   />
                 ),
               )}
@@ -49,16 +51,15 @@ const WaitingRoom = () => {
                     playerName={item.username}
                     isEmptySlot={false}
                     key={index}
+                    isCurrentUser={item.username === auth.user?.username}
                   />
                 ),
               )}
             </div>
           </div>
         </div>
-        <div>Waiting List</div>
-        <div className='waiting-room__waiting-list'>
-          <PlayerItem />
-          <PlayerItem />
+        <div className='waiting-room__btn'>
+          <Button>Leave Room</Button>
         </div>
       </div>
     </Layout>

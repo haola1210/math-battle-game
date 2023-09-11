@@ -8,7 +8,7 @@ export const getRoomList = async () => {
   return data.data as unknown as IRoom[];
 };
 
-export const getRoomInfo = async (id: string) => {
+export const getRoomInfo = async (id: string): Promise<IRoom | undefined> => {
   const data = await privateInstance.get(`${roomPath}/info/${id}`);
   return data.data as unknown as IRoom;
 };
