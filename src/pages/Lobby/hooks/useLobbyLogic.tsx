@@ -44,8 +44,7 @@ export const useLobbyLogic = () => {
           navigate(`${LINK.WAITING_ROOM}/${room._id}`);
           toast(`Create ${room.room_name} success !`);
         } else {
-          const tmpList = [...roomList, room];
-          setRoomList(tmpList);
+          setRoomList((prev) => [...prev, room]);
         }
       },
     );
@@ -73,8 +72,7 @@ export const useLobbyLogic = () => {
           navigate(`${LINK.WAITING_ROOM}/${room._id}`);
           toast('Join room success!');
         } else {
-          const tmpList = roomList.map((item) => (item._id === room._id ? room : item));
-          setRoomList(tmpList);
+          setRoomList((prev) => prev.map((item) => (item._id === room._id ? room : item)));
         }
       },
     );

@@ -1,5 +1,6 @@
 import { LINK } from '@constants/link';
 import { USER_EVENT } from '@constants/room-event';
+import { useAuthContext } from '@contexts/AuthContext';
 import { useSocket } from '@contexts/SocketContext';
 import { IRoom } from '@interfaces/room.interfaces';
 import { IUser } from '@interfaces/user.interface';
@@ -14,6 +15,7 @@ const useWaitingRoomLogic = () => {
   const { room_id } = useParams();
   const socket = useSocket();
   const navigate = useNavigate();
+  const auth = useAuthContext();
 
   useEffect(() => {
     iIFE(async () => {
@@ -33,8 +35,7 @@ const useWaitingRoomLogic = () => {
       USER_EVENT.JOIN_ROOM_FEEDBACK_ROOM,
       async ({ user_joined }: { user_joined: IUser }) => {
         try {
-          const tempRoommate = [...roommate, user_joined];
-          setRoommate(tempRoommate);
+          setRoommate((prev) => [user_joined, ...prev]);
         } catch (error) {
           toast('Something went wrong!');
         }
@@ -46,7 +47,7 @@ const useWaitingRoomLogic = () => {
     };
   }, []);
 
-  return { roommate };
+  return { roommate, auth };
 };
 
 export default useWaitingRoomLogic;
