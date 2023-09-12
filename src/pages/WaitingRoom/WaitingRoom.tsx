@@ -8,7 +8,7 @@ import { TEAM } from '@constants/team';
 import Button from '@components/Button';
 
 const WaitingRoom = () => {
-  const { roommate, auth } = useWaitingRoomLogic();
+  const { roommate, auth, handleLeaveRoom } = useWaitingRoomLogic();
   return (
     <Layout>
       <div className='waiting-room'>
@@ -59,7 +59,7 @@ const WaitingRoom = () => {
           </div>
         </div>
         <div className='waiting-room__btn'>
-          <Button>Leave Room</Button>
+          <Button onClick={handleLeaveRoom}>Leave Room</Button>
         </div>
       </div>
     </Layout>

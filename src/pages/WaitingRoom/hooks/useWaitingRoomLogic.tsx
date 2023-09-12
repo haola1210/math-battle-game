@@ -47,7 +47,26 @@ const useWaitingRoomLogic = () => {
     };
   }, []);
 
-  return { roommate, auth };
+  // leave room feedback room
+  useEffect(() => {
+    socket?.current?.on(USER_EVENT.LEAVE_ROOM_FEEDBACK_ROOM, async (data) => {
+      console.log(data);
+    });
+
+    return () => {
+      socket?.current?.off();
+    };
+  }, []);
+
+  const handleLeaveRoom = () => {
+    const payload = {
+      user_id: auth.user?._id,
+      room_id,
+    };
+    socket?.current?.emit(USER_EVENT.LEAVE_ROOM, payload);
+  };
+
+  return { roommate, auth, handleLeaveRoom };
 };
 
 export default useWaitingRoomLogic;
