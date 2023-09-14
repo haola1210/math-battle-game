@@ -5,6 +5,9 @@
     border: 1px solid red;
   }
   @apply bg-stone-600 rounded-lg p-2 flex flex-col;
+  &__header{
+   @apply flex justify-between;
+  }
   &__level{
     @apply flex-wrap justify-end items-end flex grow;
   }

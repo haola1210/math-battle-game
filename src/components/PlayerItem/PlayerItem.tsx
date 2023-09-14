@@ -4,12 +4,16 @@ interface IPlayerItemProps {
   playerName?: string;
   isEmptySlot?: boolean;
   isCurrentUser?: boolean;
+  isOwner?: boolean;
 }
 
-const PlayerItem = ({ playerName, isEmptySlot, isCurrentUser }: IPlayerItemProps) => {
+const PlayerItem = ({ playerName, isEmptySlot, isCurrentUser, isOwner }: IPlayerItemProps) => {
   return (
     <div className={`player-item ${isCurrentUser ? `hightlight` : ``}`}>
-      <div>{isEmptySlot ? `` : playerName}</div>
+      <div className='player-item__header'>
+        {isEmptySlot ? `` : <div>{playerName}</div>}
+        {isOwner ? <div>Owner</div> : ``}
+      </div>
       <div className='play-item__level'></div>
     </div>
   );
