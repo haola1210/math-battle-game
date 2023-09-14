@@ -1,10 +1,11 @@
 import { LINK } from '@constants/link';
 import { USER_EVENT } from '@constants/room-event';
 import { SOCKET_MESSAGE } from '@constants/socket-message.enum';
+import { type TEAM } from '@constants/team';
 import { useAuthContext } from '@contexts/AuthContext';
 import { useSocket } from '@contexts/SocketContext';
-import { IRoom } from '@interfaces/room.interfaces';
-import { IUser } from '@interfaces/user.interface';
+import { type IRoom } from '@interfaces/room.interfaces';
+import { type IUser } from '@interfaces/user.interface';
 import { getRoomInfo } from '@services/room.service';
 import { iIFE } from '@utils/IIFE';
 import { useEffect, useState } from 'react';
@@ -97,6 +98,21 @@ const useWaitingRoomLogic = () => {
     };
   }, []);
 
+  // user change team
+  useEffect(() => {
+    socket?.current?.on(USER_EVENT.USER_CHANGE_TEAM_FEEDBACK, async ({ user }: { user: IUser }) => {
+      console.log(user);
+      setRoom((prev) => {
+        const tempUsers = prev.users.map((item) => (item._id === user._id ? user : item));
+        return { ...prev, user: tempUsers };
+      });
+    });
+
+    return () => {
+      socket?.current?.off();
+    };
+  }, []);
+
   const handleLeaveRoom = () => {
     const payload = {
       user_id: auth.user?._id,
@@ -105,7 +121,12 @@ const useWaitingRoomLogic = () => {
     socket?.current?.emit(USER_EVENT.LEAVE_ROOM, payload);
   };
 
-  return { room, auth, handleLeaveRoom };
+  const handleChangeTeam = (team: TEAM) => {
+    const payload = { user_id: auth.user?._id, team, room_id };
+    socket?.current?.emit(USER_EVENT.USER_CHANGE_TEAM, payload);
+  };
+
+  return { room, auth, handleLeaveRoom, handleChangeTeam };
 };
 
 export default useWaitingRoomLogic;
