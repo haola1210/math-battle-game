@@ -8,7 +8,7 @@ import { TEAM } from '@constants/team';
 import Button from '@components/Button';
 
 const WaitingRoom = () => {
-  const { roommate, auth, handleLeaveRoom } = useWaitingRoomLogic();
+  const { room, auth, handleLeaveRoom } = useWaitingRoomLogic();
   return (
     <Layout>
       <div className='waiting-room'>
@@ -17,7 +17,7 @@ const WaitingRoom = () => {
           <div className='waiting-room__team'>
             <div>Team 1</div>
             <div className='waiting-room__team--player'>
-              {addUsersToTeam(roommate, TEAM.ONE).map((item, index) =>
+              {addUsersToTeam(room, TEAM.ONE).map((item, index) =>
                 item === '' ? (
                   <PlayerItem
                     isEmptySlot
@@ -29,6 +29,7 @@ const WaitingRoom = () => {
                     isEmptySlot={false}
                     key={index}
                     isCurrentUser={item.username === auth.user?.username}
+                    isOwner={item.username === room.owner?.username}
                   />
                 ),
               )}
@@ -40,7 +41,7 @@ const WaitingRoom = () => {
           <div className='waiting-room__team'>
             <div>Team 2</div>
             <div className='waiting-room__team--player'>
-              {addUsersToTeam(roommate, TEAM.TWO).map((item, index) =>
+              {addUsersToTeam(room, TEAM.TWO).map((item, index) =>
                 item === '' ? (
                   <PlayerItem
                     isEmptySlot
@@ -52,6 +53,7 @@ const WaitingRoom = () => {
                     isEmptySlot={false}
                     key={index}
                     isCurrentUser={item.username === auth.user?.username}
+                    isOwner={item.username === room.owner?.username}
                   />
                 ),
               )}

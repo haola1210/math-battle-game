@@ -1,5 +1,6 @@
 import { LINK } from '@constants/link';
 import { USER_EVENT } from '@constants/room-event';
+import { SOCKET_MESSAGE } from '@constants/socket-message.enum';
 import { useAuthContext } from '@contexts/AuthContext';
 import { useSocket } from '@contexts/SocketContext';
 import { type IRoom } from '@interfaces/room.interfaces';
@@ -72,6 +73,29 @@ export const useLobbyLogic = () => {
           navigate(`${LINK.WAITING_ROOM}/${room._id}`);
           toast('Join room success!');
         } else {
+          setRoomList((prev) => prev.map((item) => (item._id === room._id ? room : item)));
+        }
+      },
+    );
+
+    return () => {
+      socket?.current?.off();
+    };
+  }, []);
+
+  // leave room
+  useEffect(() => {
+    socket?.current?.on(
+      USER_EVENT.LEAVE_ROOM_FEEDBACK_LOBBY,
+      async ({ room, message }: { room: IRoom; message: string }) => {
+        if (message === SOCKET_MESSAGE.LAST_PERSON_LEAVE_ROOM) {
+          setRoomList((prev) => prev.filter((item) => item._id !== room._id));
+        }
+
+        if (
+          message === SOCKET_MESSAGE.OWNER_LEAVE_ROOM ||
+          message === SOCKET_MESSAGE.ROOMMATE_LEAVE_ROOM
+        ) {
           setRoomList((prev) => prev.map((item) => (item._id === room._id ? room : item)));
         }
       },
