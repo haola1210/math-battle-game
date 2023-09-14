@@ -8,7 +8,7 @@ import { TEAM } from '@constants/team';
 import Button from '@components/Button';
 
 const WaitingRoom = () => {
-  const { room, auth, handleLeaveRoom } = useWaitingRoomLogic();
+  const { room, auth, handleLeaveRoom, handleChangeTeam } = useWaitingRoomLogic();
   return (
     <Layout>
       <div className='waiting-room'>
@@ -22,6 +22,7 @@ const WaitingRoom = () => {
                   <PlayerItem
                     isEmptySlot
                     key={index}
+                    onClick={() => handleChangeTeam(TEAM.ONE)}
                   />
                 ) : (
                   <PlayerItem
@@ -46,6 +47,7 @@ const WaitingRoom = () => {
                   <PlayerItem
                     isEmptySlot
                     key={index}
+                    onClick={() => handleChangeTeam(TEAM.TWO)}
                   />
                 ) : (
                   <PlayerItem

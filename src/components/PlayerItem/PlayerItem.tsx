@@ -1,3 +1,4 @@
+import { type MouseEventHandler } from 'react';
 import './style.scss';
 
 interface IPlayerItemProps {
@@ -5,11 +6,21 @@ interface IPlayerItemProps {
   isEmptySlot?: boolean;
   isCurrentUser?: boolean;
   isOwner?: boolean;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-const PlayerItem = ({ playerName, isEmptySlot, isCurrentUser, isOwner }: IPlayerItemProps) => {
+const PlayerItem = ({
+  playerName,
+  isEmptySlot,
+  isCurrentUser,
+  isOwner,
+  onClick,
+}: IPlayerItemProps) => {
   return (
-    <div className={`player-item ${isCurrentUser ? `hightlight` : ``}`}>
+    <div
+      className={`player-item ${isCurrentUser ? `hightlight` : ``}`}
+      onClick={onClick}
+    >
       <div className='player-item__header'>
         {isEmptySlot ? `` : <div>{playerName}</div>}
         {isOwner ? <div>Owner</div> : ``}
